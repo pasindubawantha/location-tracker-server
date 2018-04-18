@@ -81,10 +81,8 @@ var state = "nothing"
 app.use(bodyParser.json())
 
 app.get('/fb_messager', function(req, res) {
-	console.log(req.params.hub.challenge)
 	console.log(req.params)
-	console.log(req.params.hub)
-	res.send(req.params.hub.challenge)
+	res.send(req.params.)
 
 })
 app.get('/', function(req, res) {

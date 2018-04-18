@@ -76,16 +76,24 @@ homeRef.on("value", function(home) {
 });
 
 
+var state = "nothing"
+
 app.post('/fb_messager', function(req, res) {
+	console.log(req)
+	res.send('EAASvdcVpOAoBAPGBvZCeaOWmZAT8bUbm0VPSZAZBQVqWSUV64dzZBPXNLd115AWc2mZByMCSxndz4eJAviqNG3M6xAmmirKi8cCmMPmvrkWyd7QsKXlrpZABI72EtV9PjTSIgbZAexKzYmiXtbpu6MeG0vqBaB8beBZAIweILIcTDmQZDZD')
+
+})
+app.get('/fb_messager', function(req, res) {
 	console.log(req)
 	res.send('EAASvdcVpOAoBAPGBvZCeaOWmZAT8bUbm0VPSZAZBQVqWSUV64dzZBPXNLd115AWc2mZByMCSxndz4eJAviqNG3M6xAmmirKi8cCmMPmvrkWyd7QsKXlrpZABI72EtV9PjTSIgbZAexKzYmiXtbpu6MeG0vqBaB8beBZAIweILIcTDmQZDZD')
 
 })
 app.get('/', function(req, res) {
 	console.log(req)
-	res.send('HI')
+	res.send(JSON.stringify(state))
 
 })
 
 
 app.listen(PORT, () => console.log('Example app listening on port '.concat('',PORT)))
+

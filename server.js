@@ -165,10 +165,10 @@ homeRef.on("value", function(home) {
 	  				var y2 = location[1]
 	  				if(home.notifaction_on == 1){
 	  					var distance = measure(x1,y1,x2,y2)
-	  					console.log(" time " "User : " + home.monitor_users[j] + " Distance : " + distance +" meters ");
+	  					console.log(time + " User : " + home.monitor_users[j] + " Distance : " + distance +" meters ");
 	  					if(distance <= home.alert_radius){
 	  						var alert_object = JSON.parse(JSON.stringify(users[home.monitor_users[j]].data[i]))
-	  						sendAlltert(home.fb_puid, " time " "User : " + home.monitor_users[j] + " Distance : " + distance +" meters " )
+	  						sendAlltert(home.fb_puid, time + " User : " + home.monitor_users[j] + " Distance : " + distance +" meters " )
 	  					}
 	  				}
 	  				
@@ -274,5 +274,5 @@ app.get('/fb', (req, res)=> {
 })
 
 
-app.listen(PORT, () => console.log('Example app listening on port '.concat('',PORT)))
+app.listen(PORT, () => console.log('LocationTracker server is listening on port '.concat('',PORT)))
 

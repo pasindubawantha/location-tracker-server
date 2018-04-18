@@ -165,9 +165,10 @@ homeRef.on("value", function(home) {
 	  				var y2 = location[1]
 	  				if(home.notifaction_on == 1){
 	  					var distance = measure(x1,y1,x2,y2)
+	  					console.log(" time " "User : " + home.monitor_users[j] + " Distance : " + distance +" meters ");
 	  					if(distance <= home.alert_radius){
 	  						var alert_object = JSON.parse(JSON.stringify(users[home.monitor_users[j]].data[i]))
-	  						sendAlltert(home.fb_puid, alert_object)
+	  						sendAlltert(home.fb_puid, " time " "User : " + home.monitor_users[j] + " Distance : " + distance +" meters " )
 	  					}
 	  				}
 	  				
@@ -205,22 +206,28 @@ app.post('/webhook', (req, res) => {
 
       // Get the webhook event. entry.messaging is an array, but 
       // will only ever contain one event, so we get index 0
-      console.log(entry);
-      let webhook_event = entry.messaging[0];
-      console.log(webhook_event);
-
-      // Get the sender PSID
-	  let sender_psid = webhook_event.sender.id;
-	  console.log('Sender PSID: ' + sender_psid);
-
-	  // Check if the event is a message or postback and
-	  // pass the event to the appropriate handler function
-	  if (webhook_event.message) {
-	    handleMessage(sender_psid, webhook_event.message);        
-	  } else if (webhook_event.postback) {
-	    handlePostback(sender_psid, webhook_event.postback);
-	  }
+      if(entry.messaging){
+      	let webhook_event = entry.messaging[0];
+      }else if(entry.standby){
+      	let webhook_event = entry.standby[0];
+      }
       
+      if(webhook_event){
+	      // Get the sender PSID
+		  let sender_psid = webhook_event.sender.id;
+		  console.log('Sender PSID: ' + sender_psid);
+
+		  // Check if the event is a message or postback and
+		  // pass the event to the appropriate handler function
+		  if (webhook_event.message) {
+		    handleMessage(sender_psid, webhook_event.message);        
+		  } else if (webhook_event.postback) {
+		    handlePostback(sender_psid, webhook_event.postback);
+		  }
+      }else{
+      	console.log("Event not identified");
+      	console.log(entry);
+      }
     });
 
     // Return a '200 OK' response to all events

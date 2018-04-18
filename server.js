@@ -3,6 +3,7 @@ const firebase = require('firebase')
 const environment = require('./environment')
 const PORT = process.env.PORT || 5000
 const app = express()
+const bodyParser = require('body-parser')
 
 firebase.initializeApp(environment.firebase);
 
@@ -77,14 +78,10 @@ homeRef.on("value", function(home) {
 
 
 var state = "nothing"
+app.use(bodyParser.json())
 
-app.post('/fb_messager', function(req, res) {
-	console.log(req)
-	res.send('1944307455')
-
-})
 app.get('/fb_messager', function(req, res) {
-	console.log(req)
+	console.log(req.body)
 	res.send('1944307455')
 
 })

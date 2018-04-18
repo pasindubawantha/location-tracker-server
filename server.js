@@ -80,6 +80,11 @@ app.post('/fb_messager', function(req, res) {
 	res.send('EAASvdcVpOAoBAPGBvZCeaOWmZAT8bUbm0VPSZAZBQVqWSUV64dzZBPXNLd115AWc2mZByMCSxndz4eJAviqNG3M6xAmmirKi8cCmMPmvrkWyd7QsKXlrpZABI72EtV9PjTSIgbZAexKzYmiXtbpu6MeG0vqBaB8beBZAIweILIcTDmQZDZD')
 
 })
+app.get('/', function(req, res) {
+	console.log(req)
+	res.send('HI')
+
+})
 
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))

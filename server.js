@@ -206,10 +206,11 @@ app.post('/webhook', (req, res) => {
 
       // Get the webhook event. entry.messaging is an array, but 
       // will only ever contain one event, so we get index 0
+      let webhook_event;
       if(entry.messaging){
-      	let webhook_event = entry.messaging[0];
+      	webhook_event = entry.messaging[0];
       }else if(entry.standby){
-      	let webhook_event = entry.standby[0];
+      	webhook_event = entry.standby[0];
       }
       
       if(webhook_event){

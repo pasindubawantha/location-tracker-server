@@ -82,7 +82,7 @@ app.use(bodyParser.json())
 
 app.get('/fb_messager', function(req, res) {
 	console.log(req.params)
-	res.send(req.params.)
+	res.send(req.params)
 
 })
 app.get('/', function(req, res) {

@@ -187,15 +187,8 @@ homeRef.on("value", function(home) {
 
 app.use(bodyParser.json())
 
-app.get('/fb_messager', function(req, res) {
-	console.log(req.query['hub.challenge'])
-	res.send(req.query['hub.challenge'])
-
-})
 app.get('/', function(req, res) {
-	console.log(req)
-	res.send(JSON.stringify(state))
-
+	res.send('go to /fb')
 })
 
 
@@ -268,7 +261,7 @@ app.get('/webhook', (req, res) => {
 });
 
 app.get('/fb', (req, res)=> {
-	res.status(200).send('<a gref="http://m.me/<PAGE_NAME"> Go to link and send message to start notifications </a>')
+	res.status(200).send('<!doctype html><html lang="en"><body><a gref="http://m.me/hollydogeness"> Go to link and send message to start notifications </a></body></html>')
 
 })
 

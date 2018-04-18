@@ -80,12 +80,12 @@ var state = "nothing"
 
 app.post('/fb_messager', function(req, res) {
 	console.log(req)
-	res.send('EAASvdcVpOAoBAPGBvZCeaOWmZAT8bUbm0VPSZAZBQVqWSUV64dzZBPXNLd115AWc2mZByMCSxndz4eJAviqNG3M6xAmmirKi8cCmMPmvrkWyd7QsKXlrpZABI72EtV9PjTSIgbZAexKzYmiXtbpu6MeG0vqBaB8beBZAIweILIcTDmQZDZD')
+	res.send('1944307455')
 
 })
 app.get('/fb_messager', function(req, res) {
 	console.log(req)
-	res.send('EAASvdcVpOAoBAPGBvZCeaOWmZAT8bUbm0VPSZAZBQVqWSUV64dzZBPXNLd115AWc2mZByMCSxndz4eJAviqNG3M6xAmmirKi8cCmMPmvrkWyd7QsKXlrpZABI72EtV9PjTSIgbZAexKzYmiXtbpu6MeG0vqBaB8beBZAIweILIcTDmQZDZD')
+	res.send('1944307455')
 
 })
 app.get('/', function(req, res) {

@@ -323,7 +323,7 @@ var MapComponent = /** @class */ (function () {
         var script = document.createElement('script');
         document.body.appendChild(script);
         script.onload = this.plotMap.bind(this);
-        script.src = 'http://maps.googleapis.com/maps/api/js?key=AIzaSyBJvgGeSDM8Gazqa96BTe13PQMYKmTYyE8';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBJvgGeSDM8Gazqa96BTe13PQMYKmTYyE8';
     };
     MapComponent.prototype.plotMap = function () {
         this.homeService.getHome().subscribe(function (home) {

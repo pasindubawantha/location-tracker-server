@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 5000
 const app = express()
 const bodyParser = require('body-parser')
 const request = require('request');
+var path = require('path');
 
 firebase.initializeApp(environment.firebase);
 
@@ -178,6 +179,7 @@ homeRef.on("value", function(home) {
 			setTimeout(function () {sendAlltert(home.fb_puid, "All Allerts sent")}, 1500);
 			alert_sent = false
 		}
+	  //console.log(users.val());
 	}
 	, function (error) {
 	  console.log("Failed to read users: " + error.code);
@@ -191,10 +193,11 @@ homeRef.on("value", function(home) {
 
 app.use(bodyParser.json())
 
-app.get('/', function(req, res) {
-	res.send('go to /fb')
-})
+// app.get('/', function(req, res) {
+// 	res.sendFile(path.join(__dirname + '/site/index.html'));
+// })
 
+app.use('/', express.static(__dirname + '/site'));
 
 app.post('/webhook', (req, res) => {  
 

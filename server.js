@@ -141,40 +141,43 @@ homeRef.on("value", function(home) {
   		var users = users.val()
   		var x1 = home.location.lat
   		var y1 = home.location.lng
+  		var alert_sent = false
   		for(var j=0; j<home.monitor_users.length; j++){
-  				users[home.monitor_users[j]].data.sort(function (data1, data2) {
-				  return parseInt(data2['time_sec']) - parseInt(data1['time_sec']);
-				})
-				var i=0 
-  				if(users[home.monitor_users[j]].data[i] != null){
-  					if(users[home.monitor_users[j]].data[i]['location_time_net'] !== "%LOCNTMS" && parseInt(users[home.monitor_users[j]].data[i]['location_time']) < parseInt(users[home.monitor_users[j]].data[i]['location_time_net']) ) {
-							var location = users[home.monitor_users[j]].data[i]['location_net'].split(",")
-							var accuracy = parseFloat(users[home.monitor_users[j]].data[i]['location_accuracy_net'])
-							var loc_time = parseInt(users[home.monitor_users[j]].data[i]['location_time_net'])
-						} else {
-							var location = users[home.monitor_users[j]].data[i]['location'].split(",")
-							var accuracy = parseFloat(users[home.monitor_users[j]].data[i]['location_accuracy'])
-							var loc_time = parseInt(users[home.monitor_users[j]].data[i]['location_time'])
-						}
-
-						var time_sec = parseInt(users[home.monitor_users[j]].data[i]['time_sec'])
-						var loc_time = parseInt(users[home.monitor_users[j]].data[i]['location_time'])
-						var time = users[home.monitor_users[j]].data[i]['date'].concat(" ",users[home.monitor_users[j]].data[i]['time'], "(".concat("",users[home.monitor_users[j]].data[i]['location_speed']).concat("",")"))
-						var position = {lat: parseFloat(location[0]), lng: parseFloat(location[1])}
-	  				var x2 = location[0] 
-	  				var y2 = location[1]
-	  				if(home.notifaction_on == 1){
-	  					var distance = measure(x1,y1,x2,y2) - accuracy
-	  					console.log(time + " User : " + home.monitor_users[j] + " Distance : " + distance +" meters ");
-	  					if(distance <= home.alert_radius){
-	  						var alert_object = JSON.parse(JSON.stringify(users[home.monitor_users[j]].data[i]))
-	  						sendAlltert(home.fb_puid, time + " User : " + home.monitor_users[j] + " Distance : " + distance +" meters " )
-	  					}
-	  				}
-	  				
-  				}
-  			}
-	  //console.log(users.val());
+			users[home.monitor_users[j]].data.sort(function (data1, data2) {
+				return parseInt(data2['time_sec']) - parseInt(data1['time_sec']);
+			})
+			var i=0 
+			if(users[home.monitor_users[j]].data[i] != null){
+				if(users[home.monitor_users[j]].data[i]['location_time_net'] !== "%LOCNTMS" && parseInt(users[home.monitor_users[j]].data[i]['location_time']) < parseInt(users[home.monitor_users[j]].data[i]['location_time_net']) ) {
+				var location = users[home.monitor_users[j]].data[i]['location_net'].split(",")
+				var accuracy = parseFloat(users[home.monitor_users[j]].data[i]['location_accuracy_net'])
+				var loc_time = parseInt(users[home.monitor_users[j]].data[i]['location_time_net'])
+			} else {
+				var location = users[home.monitor_users[j]].data[i]['location'].split(",")
+				var accuracy = parseFloat(users[home.monitor_users[j]].data[i]['location_accuracy'])
+				var loc_time = parseInt(users[home.monitor_users[j]].data[i]['location_time'])
+			}
+			var time_sec = parseInt(users[home.monitor_users[j]].data[i]['time_sec'])
+			var loc_time = parseInt(users[home.monitor_users[j]].data[i]['location_time'])
+			var time = users[home.monitor_users[j]].data[i]['date'].concat(" ",users[home.monitor_users[j]].data[i]['time'], "(".concat("",users[home.monitor_users[j]].data[i]['location_speed']).concat("",")"))
+			var position = {lat: parseFloat(location[0]), lng: parseFloat(location[1])}
+				var x2 = location[0] 
+				var y2 = location[1]
+				if(home.notifaction_on == 1){
+					var distance = measure(x1,y1,x2,y2) - accuracy
+					console.log(time + " User : " + home.monitor_users[j] + " Distance : " + distance +" meters ");
+					if(distance <= home.alert_radius){
+						var alert_object = JSON.parse(JSON.stringify(users[home.monitor_users[j]].data[i]))
+						alert_sent = true
+						sendAlltert(home.fb_puid, time + " User : " + home.monitor_users[j] + " Distance : " + distance +" meters " )
+					}
+				}
+			}
+		}
+		if(alert_sent){
+			setTimeout(function () {sendAlltert(home.fb_puid, "All Allerts sent")}, 1500);
+			alert_sent = false
+		}
 	}
 	, function (error) {
 	  console.log("Failed to read users: " + error.code);

@@ -115,9 +115,9 @@ function callSendAPI(sender_psid, response) {
   }); 
 }
 
-function sendAlltert(sender_psid,alert_object) {
+function sendAlltert(sender_psid,message) {
 	if(sender_psid){
-		callSendAPI(sender_psid,JSON.stringify(alert_object))
+		callSendAPI(sender_psid,{text : message})
 	}
 	
 }
@@ -149,11 +149,11 @@ homeRef.on("value", function(home) {
   				if(users[home.monitor_users[j]].data[i] != null){
   					if(users[home.monitor_users[j]].data[i]['location_time_net'] !== "%LOCNTMS" && parseInt(users[home.monitor_users[j]].data[i]['location_time']) < parseInt(users[home.monitor_users[j]].data[i]['location_time_net']) ) {
 							var location = users[home.monitor_users[j]].data[i]['location_net'].split(",")
-							var accuracy = parseInt(users[home.monitor_users[j]].data[i]['location_accuracy_net'])
+							var accuracy = parseFloat(users[home.monitor_users[j]].data[i]['location_accuracy_net'])
 							var loc_time = parseInt(users[home.monitor_users[j]].data[i]['location_time_net'])
 						} else {
 							var location = users[home.monitor_users[j]].data[i]['location'].split(",")
-							var accuracy = parseInt(users[home.monitor_users[j]].data[i]['location_accuracy'])
+							var accuracy = parseFloat(users[home.monitor_users[j]].data[i]['location_accuracy'])
 							var loc_time = parseInt(users[home.monitor_users[j]].data[i]['location_time'])
 						}
 
@@ -164,7 +164,7 @@ homeRef.on("value", function(home) {
 	  				var x2 = location[0] 
 	  				var y2 = location[1]
 	  				if(home.notifaction_on == 1){
-	  					var distance = measure(x1,y1,x2,y2)
+	  					var distance = measure(x1,y1,x2,y2) - accuracy
 	  					console.log(time + " User : " + home.monitor_users[j] + " Distance : " + distance +" meters ");
 	  					if(distance <= home.alert_radius){
 	  						var alert_object = JSON.parse(JSON.stringify(users[home.monitor_users[j]].data[i]))

@@ -8,8 +8,8 @@ const environment = {
     messagingSenderId: "615319515730"
   },
   fb_messnger: {
-  	page_access_token : "EAASvdcVpOAoBAPGBvZCeaOWmZAT8bUbm0VPSZAZBQVqWSUV64dzZBPXNLd115AWc2mZByMCSxndz4eJAviqNG3M6xAmmirKi8cCmMPmvrkWyd7QsKXlrpZABI72EtV9PjTSIgbZAexKzYmiXtbpu6MeG0vqBaB8beBZAIweILIcTDmQZDZD",
-  	my_verify_token : "EAASvdcVpOAoBAPGBvZCeaOWmZAT8bUbm0VPSZAZBQVqWSUV64dzZBPXNLd115AWc2mZByMCSxndz4eJAviqNG3M6xAmmirKi8cCmMPmvrkWyd7QsKXlrpZABI72EtV9PjTSIgbZAexKzYmiXtbpu6MeG0vqBaB8beBZAIweILIcTDmQZDZD",
+  	page_access_token : "EAASvdcVpOAoBACY1jFro3OXeV7SsVU8XLQfk9Tp3wa1tu4HY1atYTctWV16YJWlzGpmCx9CzqSjLGXZCJAF1aosc3U0cZCdRyUTbS8zy761uPMcO5jRZADQV9GHcs5LGZC0OKKmTqFf2YeiBtcCoYFaqsegTCZCbg19oOARdjegZDZD",
+  	my_verify_token : "EAASvdcVpOAoBACY1jFro3OXeV7SsVU8XLQfk9Tp3wa1tu4HY1atYTctWV16YJWlzGpmCx9CzqSjLGXZCJAF1aosc3U0cZCdRyUTbS8zy761uPMcO5jRZADQV9GHcs5LGZC0OKKmTqFf2YeiBtcCoYFaqsegTCZCbg19oOARdjegZDZD",
   	callback_url: "fb_messager"
   }
 }

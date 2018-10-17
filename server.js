@@ -13,11 +13,12 @@ const db = firebase.database();
 
 var usersRef = db.ref("users/");
 var homeRef = db.ref("home/");
-var notificationRef =db.ref('/home/notifaction_on');
+var notificationRef = db.ref('/home/notifaction_on');
 
 
 var sendMessageOn = 1;
 
+// Checks notification settings and turn on, off sendMessage
 notificationRef.on("value", function(n) {
   sendMessageOn = n.val()
 }, function (errorObject) {
@@ -108,8 +109,10 @@ function callSendAPI(sender_psid, response) {
     "method": "POST",
     "json": request_body
   }, (err, res, body) => {
+	
     if (!err) {
-      console.log('message sent!')
+			console.log('message sent!')
+			console.log(err)
     } else {
       console.error("Unable to send message:" + err);
     }

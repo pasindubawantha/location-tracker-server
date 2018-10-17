@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 5000
 const app = express()
 const bodyParser = require('body-parser')
 const request = require('request');
+var mailjet = require('node-mailjet').connect(environment.mailjet.public_key, environment.mailjet.secret_key);
+    
 var path = require('path');
 
 firebase.initializeApp(environment.firebase);
@@ -112,7 +114,6 @@ function callSendAPI(sender_psid, response) {
 	
     if (!err) {
 			console.log('message sent!')
-			console.log(err)
     } else {
       console.error("Unable to send message:" + err);
     }
@@ -124,6 +125,28 @@ function sendAlltert(sender_psid,message) {
 		callSendAPI(sender_psid,{text : message})
 	}
 	
+	var request = mailjet
+    .post("send")
+    .request({
+        "FromEmail":"info@sandhooraholdings.lk",
+        "FromName":"info@sandhooraholdings.lk",
+        "Subject":"LOCATION TRACKER !!!",
+        "Text-part":message,
+        "Html-part":"",
+        "Recipients":[
+                {
+                        "Email": environment.mailjet.recipient
+                }
+        ]
+		})
+// request
+//     .on('success', function (response, body) {
+//         console.log (response.statusCode, body);
+//     })
+//     .on('error', function (err, response) {
+//         console.log (response.statusCode, err);
+//     });
+
 }
 
 function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function

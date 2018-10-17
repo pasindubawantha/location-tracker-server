@@ -16,15 +16,22 @@ const db = firebase.database();
 var usersRef = db.ref("users/");
 var homeRef = db.ref("home/");
 var notificationRef = db.ref('/home/notifaction_on');
-
+var emailListRef = db.ref('/home/notify_emails');
 
 var sendMessageOn = 1;
+var emailList = [];
 
 // Checks notification settings and turn on, off sendMessage
 notificationRef.on("value", function(n) {
   sendMessageOn = n.val()
 }, function (errorObject) {
   console.log("error reading notification status" + errorObject.code);
+});
+
+emailListRef.on("value", function(n) {
+  emailList = n.val()
+}, function (errorObject) {
+  console.log("error reading email list" + errorObject.code);
 });
 
 
@@ -133,11 +140,7 @@ function sendAlltert(sender_psid,message) {
         "Subject":"LOCATION TRACKER !!!",
         "Text-part":message,
         "Html-part":"",
-        "Recipients":[
-                {
-                        "Email": environment.mailjet.recipient
-                }
-        ]
+        "Recipients":emailList
 		})
 // request
 //     .on('success', function (response, body) {
